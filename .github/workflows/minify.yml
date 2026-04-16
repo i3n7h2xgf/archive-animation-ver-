@@ -18,10 +18,10 @@ jobs:
       - name: Minify JS, CSS, and HTML
         uses: nizaris/minify-all-action@master
         with:
-          directory: 'website-project1'
+          directory: '.' # Titik artinya 'proses semua file di repo ini'
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: website-project1-minified
+          folder: '-minified' # Ini folder output default-nya
           branch: gh-pages
