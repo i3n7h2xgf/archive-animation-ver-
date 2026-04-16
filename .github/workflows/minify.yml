@@ -12,16 +12,33 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Minify JS, CSS, and HTML
-        uses: nizaris/minify-all-action@master
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          directory: '.' # Titik artinya 'proses semua file di repo ini'
+          node-version: '20'
+
+      - name: Install Minifiers
+        run: |
+          npm install -g clean-css-cli terser html-minifier
+
+      - name: Minify Process
+        run: |
+          # Bikin folder hasil
+          mkdir dist
+          # Copy semua file dulu
+          cp -r . dist/ || true
+          # Minify CSS
+          find dist -name "*.css" -exec cleancss -o {} {} \;
+          # Minify JS
+          find dist -name "*.js" -exec terser {} -o {} \;
+          # Minify HTML
+          find dist -name "*.html" -exec html-minifier --collapse-whitespace --remove-comments --minify-js true --minify-css true -o {} {} \;
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: '-minified' # Ini folder output default-nya
+          folder: dist # Kita pakai folder 'dist' sebagai hasil akhir
           branch: gh-pages
