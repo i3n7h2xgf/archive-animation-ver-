@@ -21,24 +21,25 @@ jobs:
           node-version: '20'
 
       - name: Install Minifiers
-        run: |
-          npm install -g clean-css-cli terser html-minifier
+        run: npm install -g clean-css-cli terser html-minifier
 
       - name: Minify Process
         run: |
-          # Bikin folder hasil
           mkdir dist
-          # Copy semua file dulu
-          cp -r . dist/ || true
-          # Minify CSS
+          # Copy cuma file web aja, jangan copy folder .github biar gak kuning/error
+          cp -r *.html *.png *.jpg *.jpeg *.svg *.gif dist/ 2>/dev/null || true
+          cp -r css/ dist/css/ 2>/dev/null || true
+          cp -r js/ dist/js/ 2>/dev/null || true
+          cp -r assets/ dist/assets/ 2>/dev/null || true
+          cp -r fonts/ dist/fonts/ 2>/dev/null || true
+
+          # Proses Minify (Cuma file di dalem folder dist)
           find dist -name "*.css" -exec cleancss -o {} {} \;
-          # Minify JS
           find dist -name "*.js" -exec terser {} -o {} \;
-          # Minify HTML
-          find dist -name "*.html" -exec html-minifier --collapse-whitespace --remove-comments --minify-js true --minify-css true -o {} {} \;
+          find dist -name "*.html" -exec html-minifier --collapse-whitespace --remove-comments -o {} {} \;
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist # Kita pakai folder 'dist' sebagai hasil akhir
+          folder: dist
           branch: gh-pages
