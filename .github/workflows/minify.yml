@@ -1,4 +1,3 @@
-yaml
 name: Minify and Deploy
 
 on:
@@ -19,10 +18,10 @@ jobs:
       - name: Minify JS, CSS, and HTML
         uses: nizaris/minify-all-action@master
         with:
-          directory: '.' # Titik artinya 'proses semua file di repo ini'
+          directory: 'website-project1'
 
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: '-minified' # Ini folder output default-nya
+          folder: website-project1-minified
           branch: gh-pages
