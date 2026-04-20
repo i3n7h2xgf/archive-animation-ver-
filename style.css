@@ -11,7 +11,6 @@
     font-style: normal;
     font-weight: normal;
     src: url('FONT/PLANK___.woff'), format('woff');
-    font-display: swap;
 }
 
 @font-face {
@@ -21,14 +20,34 @@
     src: url('FONT/JetBrainsMonoNerdFontMono-Regular.ttf'), format('ttf');
 }
 
+@font-face {
+  font-family: 'Monofrik';
+  font-style: normal;
+  font-weight: normal;
+  src: url('FONT/Monofrik Demo.ttf'), format('ttf');
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+* {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 .main-wrapper {
     overflow-x: hidden;
     width: 100%;
     position: relative;
 }
 
+
 html {
   scroll-behavior: smooth;
+  overflow-y: scroll; 
+
   
 }
 
@@ -41,9 +60,10 @@ html {
 }
 
 body, html {
-    overflow-x: hidden;
+    overflow-x: hidden !important;
     width: 100%;
     position: relative;
+    
 }
 
 #landing-experimental {
@@ -53,10 +73,49 @@ body, html {
     overflow: hidden;
 }
 
+#loaderWrapper {
+  position: fixed;
+  inset: 0;
+  background:#ffffff;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999999;
+  height: 100vh;
+  width: 100%;
+  pointer-events: none;
+  top: 0;
+  margin-top: 0;
+
+  /* ... your existing styles (position: fixed, flex, etc) ... */
+  filter: blur(10px); /* Start blurry */
+  transition: filter 0.3s ease, opacity 0.5s ease; /* Smooth transition */
+}
+
+.loaderWrapper.active {
+  pointer-events: all;
+}
+
+.loader-number {
+  color: white;
+  font-family: 'Monofrik', sans-serif;
+  font-size: 10rem;
+  letter-spacing: -6px;
+}
+
+.data{
+  opacity: 0;  
+}
+
+.nav-link {
+  cursor: default;
+}
+
 #landing-experimental::after {
     content: "";
     position: absolute;
-    top: 0;
+    top: 0 ;
     left: 0;
     width: 100%;
     height: 100%;
@@ -67,8 +126,9 @@ body, html {
 
     pointer-events: none;
     z-index: 99;
-    
 }
+
+
 
 #webGLApp {
   position: absolute;
@@ -76,9 +136,29 @@ body, html {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1S;
+  z-index: 1;
   pointer-events: none;
+
+  clip-path: inset(78% 90% 90% 78%); 
+  transition: clip-path 1.5s cubic-bezier(0.83, 0, 0.17, 1);
 }
+
+/* FINISH: Expand when loader finishes */
+body.active #webGLApp {
+  clip-path: inset(0% 0% 0% 0%);
+}
+
+.data {
+    opacity: 0;
+   
+    /* 0.8s Delay: Background starts at 0s, Text starts at 0.8s */
+    transition: opacity 0.8s ease 0.8s, transform 0.8s ease 0.8s;
+}
+
+body.active .data {
+    opacity: 1;
+}
+
 canvas {
   -webkit-mask-image: linear-gradient(to bottom, 
     rgba(0,0,0,1) 0%, 
@@ -111,14 +191,50 @@ canvas {
 }
 
 .hero-text {
+    display: block;
     font-family: 'Planet Kosmos', sans-serif;
     font-size: 9.5vw; /* Adjust the font size as needed */
     letter-spacing: 2px;
-    margin-top: 100px;
+    margin-top: 90px;
     text-shadow: 0.5px 1px 2px rgb(50, 50, 50), 0 0 1em rgb(186, 186, 186);
 
     z-index: 100;
     position: absolute;
+}
+
+/* Button Chnager */
+
+.scheme-btn-fixed-wrapper {
+ margin-top: -100px;
+ position: relative;
+ z-index: 9999999999999999;
+}
+
+.scheme-btn-fixed {
+  left: 2rem;
+  margin-left: 60px;
+  
+  padding: 0.75rem 1.5rem;
+  background: rgba(71, 71, 71, 0.1);
+  backdrop-filter: blur(10px);
+  border: solid rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  
+ 
+  color: rgb(255, 255, 255);
+  font-family: 'Syne', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0,05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+}
+
+.scheme-btn-fixed:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgb(255, 255, 255, 0.5);
+  
 }
 
 /* Show all options in a grid for comparison
@@ -455,7 +571,7 @@ canvas {
   border: 2px solid white;
   border-radius: 50%;
   pointer-events: none !important;
-  z-index: 99999;
+  z-index: 99999999999999;
   transform: translate(-50%, -50%);
   transition: width 0.2s ease, height 0.2s ease, border-width 0.2s ease;
   background: transparent;
@@ -466,6 +582,8 @@ canvas {
 
    /* Biar muncul/hilangnya smooth */
 }
+
+
 
 
 .custom-cursor::before {
@@ -486,14 +604,14 @@ canvas {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    
+
 }
 
 body {
     background-color: #000000;
     color: #fff;
     font-family: 'Inter', sans-serif;
-    
-
     box-sizing: border-box;
 }
 
@@ -504,7 +622,7 @@ header {
     padding: 15px 60px;
     position: fixed;
     width: 100%;
-    top: 0;
+    top: 0 !important;
     z-index: 100;
 }
 
@@ -512,7 +630,7 @@ header {
     pointer-events: none;
 }
 
-nav, nav a {
+nav, nav a, .data {
     pointer-events: auto
 }
 
@@ -533,7 +651,7 @@ nav, nav a {
 
 .grid-hiasan {
     display: grid;
-    font-family: 'Inter', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     grid-template-columns: repeat(4, auto);
     gap: 40px;
     width: 60%;
@@ -554,7 +672,7 @@ nav {
     display: grid;
     grid-template-columns: auto auto;
     text-align: left;
-    font-family: 'Inter', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 nav a {
@@ -564,8 +682,8 @@ nav a {
     margin-left: 30px;
     font-size: 0.8rem;
     letter-spacing: 0.5px;
-    transition: opacity 0.3s;
     line-height: 1.2;
+    opacity: 0.2s;
 
     margin-bottom: 0px;
     margin-top: 0px;
@@ -574,15 +692,32 @@ nav a {
     text-align: left;
 }
 
-nav a:hover {
-    opacity: 0.5;
+/* Animation .data setting for NAV */
+nav a.data:hover {
+    pointer-events: auto;
+}
+
+
+.nav-link.data {
+    opacity: 0; /* Initial state */ 
+    transition: 0.3s ease;
+}
+
+
+
+/* Add 'body.active' or '!important' to ensure hover wins after reveal */
+.nav-link.data:hover {
+    opacity: 0.5 !important;
+    cursor: default;
+    transition: 0.3s ease;
+ /* Hover transition only starts now */
 }
 
 main {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 105vh;
+    height: 100vh;
     padding-bottom: 50px;
 }
 
@@ -624,6 +759,7 @@ hr {
     
 }
 
+
 .work-item img {
     width: 100%;
     aspect-ratio: 5 / 3;
@@ -643,7 +779,6 @@ hr {
 
 .landing-about {
     min-height: 100vh;
-    width: 100%;
 }
 
 .about-title {
