@@ -9,19 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 1. Force the browser to NOT restore scroll position
-if (history.scrollRestoration) {
-    history.scrollRestoration = 'manual';
+// 1. ini adalah page load (bukan navigasi internal)
+if (performance.navigation.type === 1) { // 1 = browser di-refresh
+    window.scrollTo(0, 0);
 }
 
-// 2. Snap to top immediately on page load
-window.scrollTo(0, 0);
+// 2. memanggil fungsi tepat saat animasi loader selesai
+function onLoaderFinished() {
+    // loader (niatnya)
+    // document.querySelector('.loader').style.display = 'none';
 
-// 3. (Optional) Force top again just as the user leaves or refreshes
-window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-};
-
+    // scroll up lagi pas konten mau muncul
+    window.scrollTo({
+        top: 0,
+        behavior: 'instant' // instant = gak ada efek geser
+    });
+}
 
 
 // --- START BAFFLE RIGHT NOW (As the site appears) ---
