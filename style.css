@@ -859,6 +859,20 @@ hr {
   text-decoration: none;
 }
 
+.work-category {
+  font-family: 'Planet Kosmos', sans-serif;
+  font-size: 2rem;
+  flex: 1;
+  text-align: center;
+  opacity: 0;
+  transition: all 0.7s ease;
+}
+
+.work-itemv2:hover .work-category {
+  opacity: 1;
+  transition: opacity 0.4s ease-out'
+}
+
 .work-itemv2 img {
   width: 30%;
   position: absolute;
