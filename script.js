@@ -9,23 +9,23 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// 1. ini adalah page load (bukan navigasi internal)
-if (performance.navigation.type === 1) { // 1 = browser di-refresh
+// 1. Matikan restorasi otomatis biar browser nggak "sok tau" inget posisi terakhir
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+
+// 2. Reset scroll tepat saat halaman selesai load (sebelum/saat loader jalan)
+// Ini bakal kena tiap kali lo navigasi antar page atau pencet Back/Forward
+window.addEventListener('load', () => {
     window.scrollTo(0, 0);
-}
+});
 
-// 2. memanggil fungsi tepat saat animasi loader selesai
-function onLoaderFinished() {
-    // loader (niatnya)
-    // document.querySelector('.loader').style.display = 'none';
-
-    // scroll up lagi pas konten mau muncul
-    window.scrollTo({
-        top: 0,
-        behavior: 'instant' // instant = gak ada efek geser
-    });
-}
-
+// 3. Khusus buat navigasi Back/Forward dari cache browser (BfCache)
+window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+        window.scrollTo(0, 0);
+    }
+});
 
 // --- START BAFFLE RIGHT NOW (As the site appears) ---
 const b = baffle(".data");
