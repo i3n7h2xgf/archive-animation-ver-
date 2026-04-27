@@ -27,6 +27,20 @@
   src: url('FONT/Monofrik Demo.ttf'), format('ttf');
 }
 
+@font-face {
+  font-family: 'NeueMontreal';
+  font-style: normal;
+  font-weight: normal;
+  src: url('FONT/NeueMontreal-Medium.otf'), format('open type');
+}
+
+@font-face {
+  font-family: 'M2P';
+  font-style: normal;
+  font-weight: normal;
+  src: url('FONT/M2PRegular-00xo.ttf'), format('ttf');
+}
+
 *::-webkit-scrollbar {
   display: none;
 }
