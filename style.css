@@ -670,6 +670,10 @@ hr {
     align-items: flex-start;
 }
 
+.title-wrapper {
+    width: 30%;
+}
+
 .archive-title {
     font-family: 'Perandory', sans-serif;
     flex: 1;
@@ -677,6 +681,11 @@ hr {
     letter-spacing: 2px;
     position: sticky;
     top: 50px;
+}
+
+.title-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
 }
 
 .archive-wrapper {
