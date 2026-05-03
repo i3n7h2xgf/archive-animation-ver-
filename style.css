@@ -976,6 +976,7 @@ hr {
   }
 
   .archive-title {
+    font-family: "Perandory", serif;
     position: relative;
     top: 0;
     font-size: 2rem;
