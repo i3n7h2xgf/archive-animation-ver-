@@ -824,3 +824,223 @@ hr {
     text-transform: uppercase;
     letter-spacing: 2px;
 }
+
+@media (max-width: 768px) {
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 15px 20px;
+  }
+
+ 
+  .grid-hiasan {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 20px;
+    width: auto;
+  }
+
+  .logo-text {
+    font-size: 0.55rem;
+  }
+
+ 
+  nav {
+    width: auto;
+    padding-right: 20px;
+    padding-top: 20px;
+    gap: 10px;
+    
+    flex-shrink: 0;
+  }
+
+  nav a {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  
+
+  .date {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+
+    font-style: bold;
+    margin: 0;
+    text-align: right;
+    z-index: 200;
+  }
+
+
+  .heading {
+    font-size: clamp(2rem, 10vw, 4rem);
+    white-space: normal;
+  }
+
+  .hero-text {
+    font-size: 12vw;
+    margin-top: 40px;
+  }
+
+  .scheme-btn-fixed {
+    margin-left: 20px;
+    font-size: 9px;
+    padding: 0.5rem 1rem;
+  }
+
+ 
+  .recents-workv2 {
+    padding: 20px;
+  }
+
+  .line-sapcerv2 {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding: 20px;
+  }
+
+ 
+  .work-itemv2 {
+    flex-direction: column;
+    align-items: flex-start;
+    height: auto;
+    font-size: 1.5rem;
+    padding: 20px;
+  }
+
+  .work-category {
+    display: none;
+  }
+
+  .work-itemv2 img {
+     display: none;
+  }
+
+ 
+
+  #about-me {
+    margin-bottom: -100px;
+  }
+
+  .about-title {
+    font-size: 30vw;
+    padding: 0 20px;
+  }
+
+  .aboutme-container {
+    padding: 40px 20px;
+  }
+
+  .aboutme-content {
+    flex-direction: column;
+    transform: scale(1);
+  }
+
+  .aboutme-image img {
+    width: 100%;
+    height: auto;
+  }
+
+  .aboutme-hero {
+    font-size: 4rem;
+  }
+
+  .about-description {
+    font-size: 14px;
+  }
+
+ 
+
+  #landing-archive {
+    margin-top: 60px;
+  }
+
+  .collection-container {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .title-wrapper {
+    width: 100%;
+  }
+
+  .archive-title {
+    position: relative;
+    top: 0;
+    font-size: 2rem;
+  }
+
+  .archive-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+ 
+
+  .contact-title2 {
+    padding: 20px;
+    margin-bottom: -20px;
+  }
+
+  .contact-item2 {
+    align-items: center;
+    
+    padding: 20px;
+    font-size: 6rem;
+  }
+
+  .line-sapcer3 {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .contact-description {
+    font-size: 2rem;
+  }
+
+  .contact-sub-description {
+    font-size: 2rem;
+    margin-left: 0;
+  }
+
+ 
+  .footer-section {
+    padding: 20px;
+  }
+
+ 
+  .custom-cursor {
+    display: none;
+  }
+}
+
+
+@media (max-width: 480px) {
+
+  .heading {
+    font-size: 1.8rem;
+  }
+
+  .hero-text {
+    font-size: 14vw;
+  }
+
+  .about-title {
+    font-size: 22vw;
+  }
+
+  .contact-item2 {
+    font-size: 1.5rem;
+  }
+
+}
